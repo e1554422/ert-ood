@@ -53,7 +53,9 @@ class LayerwiseLinearEDL(nn.Module):
     def __init__(self, n_layers: int, dim: int, n_classes: int, mean: torch.Tensor, std: torch.Tensor):
         super().__init__()
         self.weight = nn.Parameter(torch.randn(n_layers, dim, n_classes) * dim**-0.5 * 0.01)
-        self.bias = nn.Parameter(torch.zeros(n_layers, 1, n_classes))
+        # 偏置初始化为 -5: softplus(-5)≈0.007, 初始 α≈1 (均匀 Dirichlet); 若取 0 则每类先有 0.69 证据,
+        # C=1000 时 S≈1690, digamma 梯度 ψ'(α_y)-ψ'(S) 很小, 证据量几乎学不动 (smoke test 实测 u 恒为常数)
+        self.bias = nn.Parameter(torch.full((n_layers, 1, n_classes), -5.0))
         self.register_buffer("mean", mean)  # [L,1,D]
         self.register_buffer("std", std)
 
@@ -68,7 +70,7 @@ class HeadConfig:
     loss: str = "digamma"
     epochs: int = 30
     batch_size: int = 1024
-    lr: float = 1e-3
+    lr: float = 1e-2
     weight_decay: float = 1e-4
     anneal_epochs: int = 10
     kl_coef: float = 1.0

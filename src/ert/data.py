@@ -24,7 +24,8 @@ N_LAYERS = 12
 
 def _load_dir(path: Path, layers: range | list[int] | None = None) -> dict[str, np.ndarray]:
     layers = range(N_LAYERS) if layers is None else layers
-    out = {"z": np.stack([np.load(path / f"layer_{l:02d}.npy").astype(np.float32) for l in layers])}
+    # 保持缓存原生 dtype (float16) 以控制内存; 消费方按需转换精度
+    out = {"z": np.stack([np.load(path / f"layer_{l:02d}.npy") for l in layers])}
     for name in ("labels", "logits"):
         f = path / f"{name}.npy"
         if f.exists():

@@ -1,0 +1,14 @@
+runs/
+__pycache__/
+*.pyc
+.pytest_cache/
+*.npy
+*.npz
+*.pt
+*.ckpt
+paper/latex/*.aux
+paper/latex/*.log
+paper/latex/*.out
+paper/latex/*.bbl
+paper/latex/*.blg
+paper/latex/*.synctex.gz

@@ -1,0 +1,9 @@
+[project]
+name = "ert-ood"
+version = "0.1.0.dev0"
+description = "Evidential Representation Trajectory (ERT) for post-hoc OOD detection"
+requires-python = ">=3.10"
+dependencies = ["numpy", "scipy", "scikit-learn", "torch"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

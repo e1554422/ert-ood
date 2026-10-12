@@ -7,7 +7,7 @@ MSP / Energy / Maha++ / RelMaha / kNN / X-Maha, 以及 z 空间 path-surprise
 对照原文表 P5 的 ViT-B/16-augreg 行 (AUROC/FPR95, 五数据集宏平均):
   MSP 87.5/46.5 · kNN 87.8/50.1 · Maha++ 92.7/27.8 (+path 93.8/23.8) · RelMaha 92.0/30.9 · X-Maha 94.3/22.1
 闸门 G0: Maha++ 两指标均在 ±1.0 内, 且 +path 使 FPR95 下降。
-结论: (运行后填写)
+结论: G0 通过。宏平均 AUROC/FPR95: Maha++ 92.9/27.5 (原文 92.7/27.8), +path 93.9/23.9 (93.8/23.8), X-Maha 94.4/21.8 (94.3/22.1), RelMaha 92.5/30.4, kNN 88.9/47.6, MSP 88.0/45.7。
 """
 from __future__ import annotations
 
